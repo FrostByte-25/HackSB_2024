@@ -1,43 +1,31 @@
 package com.example.hacksb2024;
 
-
-import android.app.Activity;
 import android.content.Context;
-import android.media.MediaPlayer;
-import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
-
 import java.util.ArrayList;
-import java.util.List;
 
-public class CustomAdapter extends ArrayAdapter<MediaPlayer>
-{
-    ArrayList<MediaPlayer> mPA;
-    Context c;
-    int xml;
+public class CustomAdapter extends ArrayAdapter<String> {
 
-    public CustomAdapter(@NonNull Context context, int resource, @NonNull ArrayList<MediaPlayer> media) {
-        super(context, resource, media);
-        xml = resource;
-        mPA = media;
-        c = context;
-
+    public CustomAdapter(Context context, ArrayList<String> songs) {
+        super(context, 0, songs);
     }
 
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
-        LayoutInflater lF = (LayoutInflater)c.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View aL = lF.inflate(xml,null);
-        TextView name = aL.findViewById(R.id.name);
-        TextView time = aL.findViewById(R.id.time);
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_adapter, parent, false);
+        }
 
-        return aL;
+        String song = getItem(position);
+        TextView textViewItem = convertView.findViewById(R.id.textViewItem);
+        textViewItem.setText(song);
+
+        return convertView;
     }
 }
+

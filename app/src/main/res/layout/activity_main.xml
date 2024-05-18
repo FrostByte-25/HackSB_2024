@@ -57,10 +57,11 @@
         android:layout_marginTop="20dp"
         android:src="@tools:sample/avatars"
         app:srcCompat="@drawable/play"
+
         app:tint="@color/cardview_light_background"/>
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/back"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@id/textView3"
@@ -72,7 +73,7 @@
         app:tint="@color/cardview_light_background" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/forward"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@id/textView3"
@@ -100,6 +101,8 @@
         android:layout_height="300dp"
         android:layout_below="@id/seekBar"
         android:layout_centerHorizontal="true"
+        android:divider="@android:color/white"
+
         android:layout_marginTop="10dp" />
 
 
