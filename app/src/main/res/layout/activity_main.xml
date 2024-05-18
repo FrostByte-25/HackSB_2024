@@ -78,6 +78,8 @@
         android:layout_height="350dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/imageView2"
+        android:divider="#d3c4f5"
+        android:dividerHeight="5dp"
         android:layout_marginTop="10dp"/>
 
 
