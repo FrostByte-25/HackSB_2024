@@ -5,15 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<Track> playlist = new ArrayList<Track>();
 
     ListView music;
+    ArrayList<Integer> frameIds = new ArrayList<Integer>();
+    ImageView ani;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,5 +44,31 @@ public class MainActivity extends AppCompatActivity {
 
         CustomAdapter adapter = new CustomAdapter(MainActivity.this,R.layout.custom_adapter,playlist);
         music.setAdapter(adapter);
+
+        ani = findViewById(R.id.imageView);
+
+        frameIds.add(R.drawable.rose_ani2);
+        frameIds.add(R.drawable.rose_ani3);
+        frameIds.add(R.drawable.rose_ani4);
+        frameIds.add(R.drawable.rose_ani5);
+        frameIds.add(R.drawable.rose_ani6);
+        frameIds.add(R.drawable.rose_ani7);
+        frameIds.add(R.drawable.rose_ani8);
+        frameIds.add(R.drawable.rose_ani9);
+        frameIds.add(R.drawable.rose_ani10);
+        frameIds.add(R.drawable.rose_ani11);
+        frameIds.add(R.drawable.rose_ani12);
+
+        gifFrames frames = new gifFrames(frameIds);
+
+
+        Timer t = new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                ani.setImageResource(frames.getCurrentFrame());
+                frames.nextFrame();
+            }
+        }, 0, 455);
     }
 }
