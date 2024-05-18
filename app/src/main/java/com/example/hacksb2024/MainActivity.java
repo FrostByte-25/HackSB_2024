@@ -29,6 +29,6 @@ public class MainActivity extends AppCompatActivity {
         playlist.add(MediaPlayer.create(this, R.raw.track9));
         playlist.add(MediaPlayer.create(this, R.raw.track10));
 
-
+        CustomAdapter adapter = new CustomAdapter(MainActivity.this,R.layout.custom_adapter,playlist);
     }
 }
