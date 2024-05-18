@@ -17,13 +17,13 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomAdapter extends ArrayAdapter<MediaPlayer>
+public class CustomAdapter extends ArrayAdapter<Track>
 {
-    ArrayList<MediaPlayer> mPA;
+    ArrayList<Track> mPA;
     Context c;
     int xml;
 
-    public CustomAdapter(@NonNull Context context, int resource, @NonNull ArrayList<MediaPlayer> media) {
+    public CustomAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Track> media) {
         super(context, resource, media);
         xml = resource;
         mPA = media;
@@ -37,6 +37,9 @@ public class CustomAdapter extends ArrayAdapter<MediaPlayer>
         View aL = lF.inflate(xml,null);
         TextView name = aL.findViewById(R.id.name);
         TextView time = aL.findViewById(R.id.time);
+
+        name.setText(mPA.get(position).getName());
+        time.setText(mPA.get(position).getDuration());
 
         return aL;
     }

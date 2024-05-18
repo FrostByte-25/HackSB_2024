@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<MediaPlayer> playlist = new ArrayList<MediaPlayer>();
+    ArrayList<Track> playlist = new ArrayList<Track>();
 
     ListView music;
 
@@ -23,16 +23,18 @@ public class MainActivity extends AppCompatActivity {
         music = findViewById(R.id.listView);
 
 
-        playlist.add(MediaPlayer.create(this, R.raw.track1));
-        playlist.add(MediaPlayer.create(this, R.raw.track2));
-        playlist.add(MediaPlayer.create(this, R.raw.track3));
-        playlist.add(MediaPlayer.create(this, R.raw.track4));
-        playlist.add(MediaPlayer.create(this, R.raw.track5));
-        playlist.add(MediaPlayer.create(this, R.raw.track6));
-        playlist.add(MediaPlayer.create(this, R.raw.track7));
-        playlist.add(MediaPlayer.create(this, R.raw.track8));
-        playlist.add(MediaPlayer.create(this, R.raw.track9));
-        playlist.add(MediaPlayer.create(this, R.raw.track10));
+        playlist.add(new Track("Chakra Balancing Soundscape",MediaPlayer.create(this, R.raw.track1)));
+        playlist.add(new Track("Crown Chakra Connection",MediaPlayer.create(this, R.raw.track2)));
+        playlist.add(new Track("Third Eye Opening",MediaPlayer.create(this, R.raw.track3)));
+        playlist.add(new Track("Throat Chakra Expression",MediaPlayer.create(this, R.raw.track4)));
+        playlist.add(new Track("Heart Chakra Healing",MediaPlayer.create(this, R.raw.track5)));
+        playlist.add(new Track("Solar Plexus Harmony",MediaPlayer.create(this, R.raw.track6)));
+        playlist.add(new Track("Sacral Chakra Flow",MediaPlayer.create(this, R.raw.track7)));
+        playlist.add(new Track("Chakra Meditation Music",MediaPlayer.create(this, R.raw.track8)));
+        playlist.add(new Track("Align Your Chakras",MediaPlayer.create(this, R.raw.track9)));
+        playlist.add(new Track("Root Chakra Awakening",MediaPlayer.create(this, R.raw.track10)));
+
+
 
         CustomAdapter adapter = new CustomAdapter(MainActivity.this,R.layout.custom_adapter,playlist);
         music.setAdapter(adapter);
