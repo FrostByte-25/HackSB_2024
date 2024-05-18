@@ -115,6 +115,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                if(currentPlaying == playlist.size()-1)
+                {
+                    currentPlaying = 0;
+                }
+                else
+                {
+                    currentPlaying++;
+                }
+                player = playlist.get(currentPlaying).getMediaPlayer();
+            }
+        });
+
 
 
 
