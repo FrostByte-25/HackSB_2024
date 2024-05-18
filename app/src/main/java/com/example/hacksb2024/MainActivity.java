@@ -4,24 +4,32 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
 
     ArrayList<Track> playlist = new ArrayList<Track>();
 
     ListView music;
+    ArrayList<Integer> frameIds = new ArrayList<Integer>();
+    ImageView ani;
+
 
     ImageView play,forward,back;
 
     MediaPlayer player;
 
-    int currentPlaying;
+    int currentPlaying = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +58,43 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         CustomAdapter adapter = new CustomAdapter(MainActivity.this,R.layout.custom_adapter,playlist);
         music.setAdapter(adapter);
 
+        ani = findViewById(R.id.imageView);
+
+        frameIds.add(R.drawable.rose_ani2);
+        frameIds.add(R.drawable.rose_ani3);
+        frameIds.add(R.drawable.rose_ani4);
+        frameIds.add(R.drawable.rose_ani5);
+        frameIds.add(R.drawable.rose_ani6);
+        frameIds.add(R.drawable.rose_ani7);
+        frameIds.add(R.drawable.rose_ani8);
+        frameIds.add(R.drawable.rose_ani9);
+        frameIds.add(R.drawable.rose_ani10);
+        frameIds.add(R.drawable.rose_ani11);
+        frameIds.add(R.drawable.rose_ani12);
+
+        gifFrames frames = new gifFrames(frameIds);
+
+
+        Timer t = new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                ani.setImageResource(frames.getCurrentFrame());
+                frames.nextFrame();
+            }
+        }, 0, 455);
+
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(player.isPlaying())
+                if(currentPlaying == -1)
+                {
+                    currentPlaying = 0;
+                    player = playlist.get(0).getMediaPlayer();
+                    player.setOnCompletionListener(MainActivity.this);
+                    player.start();
+                }
+                else if(player.isPlaying())
                 {
                     play.setImageResource(R.drawable.play);
                     player.pause();
@@ -69,34 +110,68 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.stop();
-                if(currentPlaying == playlist.size()-1)
+                if(currentPlaying == -1)
                 {
                     currentPlaying = 0;
+                    player = playlist.get(0).getMediaPlayer();
+                    player.setOnCompletionListener(MainActivity.this);
+                    player.start();
                 }
-                else
-                {
-                    currentPlaying++;
+                else {
+                    player.stop();
+                    if (currentPlaying == playlist.size() - 1) {
+                        try {
+                            preparePls();
+                        } catch (Exception e) {
+                            Log.d("prepare error", e.getMessage());
+                        }
+                        currentPlaying = 0;
+                    } else {
+                        currentPlaying++;
+                        try {
+                            preparePls();
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    player = playlist.get(currentPlaying).getMediaPlayer();
+                    player.start();
                 }
-                player = playlist.get(currentPlaying).getMediaPlayer();
-                player.start();
             }
         });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.stop();
-                if(currentPlaying == 0)
+                if(currentPlaying == -1)
                 {
-                    currentPlaying = playlist.size()-1;
+                    currentPlaying = 0;
+                    player = playlist.get(0).getMediaPlayer();
+                    player.setOnCompletionListener(MainActivity.this);
+                    player.start();
                 }
-                else
-                {
-                    currentPlaying--;
+                else {
+                    player.stop();
+                    if (currentPlaying == 0) {
+                        try {
+                            preparePls();
+                        } catch (Exception e) {
+                            Log.d("prepare error", e.getMessage());
+                        }
+                        currentPlaying = playlist.size() - 1;
+                    }
+                    else {
+                        currentPlaying--;
+                        try {
+                            preparePls();
+                        } catch (Exception e) {
+                            Log.d("prepare error", e.getMessage());
+                        }
+                    }
+                    player = playlist.get(currentPlaying).getMediaPlayer();
+                    player.start();
+                    Log.d("back button test", "Is playing: " + currentPlaying);
                 }
-                player = playlist.get(currentPlaying).getMediaPlayer();
-                player.start();
             }
         });
 
@@ -131,5 +206,17 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
             currentPlaying++;
         }
         player = playlist.get(currentPlaying).getMediaPlayer();
+        player.start();
+    }
+
+    public void preparePls(){
+        for(int i = 0; i < playlist.size(); i++) {
+            try {
+                playlist.get(i).getMediaPlayer().prepare();
+            } catch (Exception e) {
+                Log.d("prepare error", e.getMessage());
+            }
+        }
+
     }
 }
