@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -12,10 +13,14 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<MediaPlayer> playlist = new ArrayList<MediaPlayer>();
 
+    ListView music;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        music = findViewById(R.id.listView);
 
 
         playlist.add(MediaPlayer.create(this, R.raw.track1));
@@ -30,5 +35,6 @@ public class MainActivity extends AppCompatActivity {
         playlist.add(MediaPlayer.create(this, R.raw.track10));
 
         CustomAdapter adapter = new CustomAdapter(MainActivity.this,R.layout.custom_adapter,playlist);
+        music.setAdapter(adapter);
     }
 }
