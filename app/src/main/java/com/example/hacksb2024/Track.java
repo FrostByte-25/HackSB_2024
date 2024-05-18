@@ -5,7 +5,7 @@ import android.media.MediaPlayer;
 public class Track
 {
 
-    //fixed
+    //fi
     String name;
     MediaPlayer mediaPlayer;
     int duration;
