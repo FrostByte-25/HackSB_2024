@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textSize="16dp"
-        android:text="Insert Name Here" />
+        android:text="Harmony Hub"
+        android:textStyle="bold"
+        />
 
     <TextView
         android:id="@+id/textView2"
