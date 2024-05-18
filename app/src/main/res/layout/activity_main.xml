@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/sunset"
     android:padding="20dp"
     tools:context=".MainActivity" >
 
@@ -14,6 +15,7 @@
         android:layout_centerHorizontal="true"
         android:textSize="16dp"
         android:text="Harmony Hub"
+        android:textColor="@color/white"
         android:textStyle="bold"
         />
 
@@ -24,6 +26,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/textView"
         android:layout_marginTop="10dp"
+        android:textColor="@color/white"
         android:text="timer" />
 
     <ImageView
@@ -42,6 +45,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/imageView"
         android:layout_marginTop="20dp"
+        android:textColor="@color/white"
         android:text="TextView" />
 
     <ImageView
@@ -52,7 +56,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:src="@tools:sample/avatars"
-        app:srcCompat="@drawable/play" />
+        app:srcCompat="@drawable/play"
+        app:tint="@color/white"/>
 
     <ImageView
         android:id="@+id/imageView3"
@@ -63,7 +68,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="15dp"
         android:layout_toStartOf="@id/imageView2"
-        app:srcCompat="@drawable/back" />
+        app:srcCompat="@drawable/back"
+        app:tint="@color/white" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -75,7 +81,8 @@
         android:layout_marginTop="20dp"
         android:layout_toEndOf="@id/imageView2"
         android:src="@tools:sample/avatars"
-        app:srcCompat="@drawable/skip" />
+        app:srcCompat="@drawable/skip"
+        app:tint="@color/white"/>
 
     <SeekBar
         android:id="@+id/seekBar"
@@ -83,7 +90,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/imageView2"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:background="@color/white"/>
 
     <ListView
         android:id="@+id/listView"

@@ -1,0 +1,165 @@
+Index: app/src/main/java/com/example/hacksb2024/Track.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.hacksb2024;\n\nimport android.media.MediaPlayer;\n\npublic class Track\n{\n\n    //fi\n    String name;\n    MediaPlayer mediaPlayer;\n    int duration;\n    public Track(String n, MediaPlayer mP)\n    {\n        name = n;\n        mediaPlayer = mP;\n        duration = mP.getDuration();\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public void setName(String name) {\n        this.name = name;\n    }\n\n    public MediaPlayer getMediaPlayer() {\n        return mediaPlayer;\n    }\n\n    public void setMediaPlayer(MediaPlayer mediaPlayer) {\n        this.mediaPlayer = mediaPlayer;\n    }\n\n    public int getDuration() {\n        return duration;\n    }\n\n    public void setDuration(int duration) {\n        this.duration = duration;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hacksb2024/Track.java b/app/src/main/java/com/example/hacksb2024/Track.java
+--- a/app/src/main/java/com/example/hacksb2024/Track.java	(revision 8e14da4b549afff9df1f24ffb61b3d92316cf907)
++++ b/app/src/main/java/com/example/hacksb2024/Track.java	(date 1716055955081)
+@@ -6,9 +6,10 @@
+ {
+ 
+     //fi
+-    String name;
+-    MediaPlayer mediaPlayer;
+-    int duration;
++    private String name;
++    private MediaPlayer mediaPlayer;
++    private int duration;
++
+     public Track(String n, MediaPlayer mP)
+     {
+         name = n;
+Index: app/src/main/java/com/example/hacksb2024/CustomAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.hacksb2024;\n\n\nimport android.app.Activity;\nimport android.content.Context;\nimport android.media.MediaPlayer;\nimport android.view.InflateException;\nimport android.view.LayoutInflater;\nimport android.view.View;\nimport android.view.ViewGroup;\nimport android.widget.ArrayAdapter;\nimport android.widget.TextView;\n\nimport androidx.annotation.NonNull;\n\n\nimport java.util.ArrayList;\nimport java.util.List;\n\npublic class CustomAdapter extends ArrayAdapter<Track>\n{\n    ArrayList<Track> mPA;\n    Context c;\n    int xml;\n\n    public CustomAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Track> media) {\n        super(context, resource, media);\n        xml = resource;\n        mPA = media;\n        c = context;\n\n    }\n\n    public View getView(int position, View convertView, ViewGroup parent)\n    {\n        LayoutInflater lF = (LayoutInflater)c.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);\n        View aL = lF.inflate(xml,null);\n        TextView name = aL.findViewById(R.id.name);\n        TextView time = aL.findViewById(R.id.time);\n\n        name.setText(mPA.get(position).getName());\n        time.setText(mPA.get(position).getDuration());\n\n        return aL;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hacksb2024/CustomAdapter.java b/app/src/main/java/com/example/hacksb2024/CustomAdapter.java
+--- a/app/src/main/java/com/example/hacksb2024/CustomAdapter.java	(revision 8e14da4b549afff9df1f24ffb61b3d92316cf907)
++++ b/app/src/main/java/com/example/hacksb2024/CustomAdapter.java	(date 1716055518069)
+@@ -39,7 +39,7 @@
+         TextView time = aL.findViewById(R.id.time);
+ 
+         name.setText(mPA.get(position).getName());
+-        time.setText(mPA.get(position).getDuration());
++        time.setText(""+mPA.get(position).getDuration());
+ 
+         return aL;
+     }
+Index: app/src/main/res/layout/custom_adapter.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:padding=\"20dp\">\n\n    <TextView\n        android:id=\"@+id/name\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:textSize=\"15dp\"\n        android:text=\"TextView\" />\n\n    <TextView\n        android:id=\"@+id/time\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:textSize=\"15dp\"\n        android:layout_alignParentRight=\"true\"\n        android:text=\"TextView\" />\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/custom_adapter.xml b/app/src/main/res/layout/custom_adapter.xml
+--- a/app/src/main/res/layout/custom_adapter.xml	(revision 8e14da4b549afff9df1f24ffb61b3d92316cf907)
++++ b/app/src/main/res/layout/custom_adapter.xml	(date 1716055923710)
+@@ -9,6 +9,7 @@
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="15dp"
++        android:textColor="@color/white"
+         android:text="TextView" />
+ 
+     <TextView
+@@ -17,5 +18,6 @@
+         android:layout_height="wrap_content"
+         android:textSize="15dp"
+         android:layout_alignParentRight="true"
++        android:textColor="@color/white"
+         android:text="TextView" />
+ </RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:padding=\"20dp\"\n    tools:context=\".MainActivity\" >\n\n    <TextView\n        android:id=\"@+id/textView\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_centerHorizontal=\"true\"\n        android:textSize=\"16dp\"\n        android:text=\"Harmony Hub\"\n        android:textStyle=\"bold\"\n        />\n\n    <TextView\n        android:id=\"@+id/textView2\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_below=\"@id/textView\"\n        android:layout_marginTop=\"10dp\"\n        android:text=\"timer\" />\n\n    <ImageView\n        android:id=\"@+id/imageView\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_below=\"@id/textView2\"\n        android:layout_marginTop=\"30dp\"\n        android:src=\"@tools:sample/avatars\" />\n\n    <TextView\n        android:id=\"@+id/textView3\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_below=\"@id/imageView\"\n        android:layout_marginTop=\"20dp\"\n        android:text=\"TextView\" />\n\n    <ImageView\n        android:id=\"@+id/imageView2\"\n        android:layout_width=\"50dp\"\n        android:layout_height=\"50dp\"\n        android:layout_below=\"@id/textView3\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_marginTop=\"20dp\"\n        android:src=\"@tools:sample/avatars\"\n        app:srcCompat=\"@drawable/play\" />\n\n    <ImageView\n        android:id=\"@+id/imageView3\"\n        android:layout_width=\"50dp\"\n        android:layout_height=\"50dp\"\n        android:layout_below=\"@id/textView3\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_marginTop=\"20dp\"\n        android:layout_marginRight=\"15dp\"\n        android:layout_toStartOf=\"@id/imageView2\"\n        app:srcCompat=\"@drawable/back\" />\n\n    <ImageView\n        android:id=\"@+id/imageView4\"\n        android:layout_width=\"50dp\"\n        android:layout_height=\"50dp\"\n        android:layout_below=\"@id/textView3\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_marginLeft=\"15dp\"\n        android:layout_marginTop=\"20dp\"\n        android:layout_toEndOf=\"@id/imageView2\"\n        android:src=\"@tools:sample/avatars\"\n        app:srcCompat=\"@drawable/skip\" />\n\n    <SeekBar\n        android:id=\"@+id/seekBar\"\n        android:layout_width=\"200dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_below=\"@id/imageView2\"\n        android:layout_marginTop=\"20dp\"/>\n\n    <ListView\n        android:id=\"@+id/listView\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"300dp\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_below=\"@id/seekBar\"\n        android:layout_marginTop=\"10dp\"/>\n\n\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	(revision 8e14da4b549afff9df1f24ffb61b3d92316cf907)
++++ b/app/src/main/res/layout/activity_main.xml	(date 1716055923718)
+@@ -5,6 +5,7 @@
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:padding="20dp"
++    android:background="@drawable/sunset"
+     tools:context=".MainActivity" >
+ 
+     <TextView
+@@ -14,6 +15,7 @@
+         android:layout_centerHorizontal="true"
+         android:textSize="16dp"
+         android:text="Harmony Hub"
++        android:textColor="#ffffff"
+         android:textStyle="bold"
+         />
+ 
+@@ -24,16 +26,17 @@
+         android:layout_centerHorizontal="true"
+         android:layout_below="@id/textView"
+         android:layout_marginTop="10dp"
++        android:textColor="#ffffff"
+         android:text="timer" />
+ 
+     <ImageView
+         android:id="@+id/imageView"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:layout_centerHorizontal="true"
++        android:layout_width="100dp"
++        android:layout_height="100dp"
+         android:layout_below="@id/textView2"
++        android:layout_centerHorizontal="true"
+         android:layout_marginTop="30dp"
+-        android:src="@tools:sample/avatars" />
++        app:srcCompat="@drawable/rose_ani1" />
+ 
+     <TextView
+         android:id="@+id/textView3"
+@@ -42,6 +45,7 @@
+         android:layout_centerHorizontal="true"
+         android:layout_below="@id/imageView"
+         android:layout_marginTop="20dp"
++        android:textColor="#ffffff"
+         android:text="TextView" />
+ 
+     <ImageView
+@@ -51,8 +55,8 @@
+         android:layout_below="@id/textView3"
+         android:layout_centerHorizontal="true"
+         android:layout_marginTop="20dp"
+-        android:src="@tools:sample/avatars"
+-        app:srcCompat="@drawable/play" />
++        app:srcCompat="@drawable/play"
++        app:tint="@color/white"/>
+ 
+     <ImageView
+         android:id="@+id/imageView3"
+@@ -63,7 +67,8 @@
+         android:layout_marginTop="20dp"
+         android:layout_marginRight="15dp"
+         android:layout_toStartOf="@id/imageView2"
+-        app:srcCompat="@drawable/back" />
++        app:srcCompat="@drawable/back"
++        app:tint="@color/white" />
+ 
+     <ImageView
+         android:id="@+id/imageView4"
+@@ -74,8 +79,8 @@
+         android:layout_marginLeft="15dp"
+         android:layout_marginTop="20dp"
+         android:layout_toEndOf="@id/imageView2"
+-        android:src="@tools:sample/avatars"
+-        app:srcCompat="@drawable/skip" />
++        app:srcCompat="@drawable/skip"
++        app:tint="@color/white"/>
+ 
+     <SeekBar
+         android:id="@+id/seekBar"
+@@ -83,6 +88,7 @@
+         android:layout_height="wrap_content"
+         android:layout_centerHorizontal="true"
+         android:layout_below="@id/imageView2"
++        android:background="@color/white"
+         android:layout_marginTop="20dp"/>
+ 
+     <ListView
