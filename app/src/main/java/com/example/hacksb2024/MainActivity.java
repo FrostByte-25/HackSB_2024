@@ -6,6 +6,9 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -21,12 +24,21 @@ public class MainActivity extends AppCompatActivity {
     ImageView ani;
 
 
+    ImageView play,forward,back;
+
+    MediaPlayer player;
+
+    int currentPlaying;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         music = findViewById(R.id.listView);
+        play = findViewById(R.id.imageView2);
+        forward = findViewById(R.id.imageView4);
+        back = findViewById(R.id.imageView3);
 
 
         playlist.add(new Track("Chakra Balancing Soundscape",MediaPlayer.create(this, R.raw.track1)));
@@ -70,5 +82,88 @@ public class MainActivity extends AppCompatActivity {
                 frames.nextFrame();
             }
         }, 0, 455);
+
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(player.isPlaying())
+                {
+                    play.setImageResource(R.drawable.play);
+                    player.pause();
+                }
+                else
+                {
+                    play.setImageResource(R.drawable.pause);
+                    player.start();
+                }
+            }
+        });
+
+        forward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                player.stop();
+                if(currentPlaying == playlist.size()-1)
+                {
+                    currentPlaying = 0;
+                }
+                else
+                {
+                    currentPlaying++;
+                }
+                player = playlist.get(currentPlaying).getMediaPlayer();
+                player.start();
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                player.stop();
+                if(currentPlaying == 0)
+                {
+                    currentPlaying = playlist.size()-1;
+                }
+                else
+                {
+                    currentPlaying--;
+                }
+                player = playlist.get(currentPlaying).getMediaPlayer();
+                player.start();
+            }
+        });
+
+        music.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(player != null)
+                {
+                    player.stop();
+                }
+                currentPlaying = position;
+                player = playlist.get(position).getMediaPlayer();
+
+                player.start();
+            }
+        });
+
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                if(currentPlaying == playlist.size()-1)
+                {
+                    currentPlaying = 0;
+                }
+                else
+                {
+                    currentPlaying++;
+                }
+                player = playlist.get(currentPlaying).getMediaPlayer();
+            }
+        });
+
+
+
+
     }
 }
