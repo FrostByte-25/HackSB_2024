@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,18 +21,13 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
 
     ArrayList<Track> playlist = new ArrayList<Track>();
-
     ListView music;
     ArrayList<Integer> frameIds = new ArrayList<Integer>();
     ImageView ani;
-
-
     ImageView play,forward,back;
-
     MediaPlayer player;
-
     int currentPlaying = -1;
-
+    TextView current;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         play = findViewById(R.id.imageView2);
         forward = findViewById(R.id.imageView4);
         back = findViewById(R.id.imageView3);
+
+        current = findViewById(R.id.textView3);
+        current.setText("Currently Playing: none");
+
 
 
         playlist.add(new Track("Chakra Balancing Soundscape",MediaPlayer.create(this, R.raw.track1)));
@@ -76,13 +77,15 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
 
 
         Timer t = new Timer();
-        t.scheduleAtFixedRate(new TimerTask() {
+        TimerTask tTask = new TimerTask() {
             @Override
             public void run() {
                 ani.setImageResource(frames.getCurrentFrame());
                 frames.nextFrame();
             }
-        }, 0, 455);
+        };
+        t.scheduleAtFixedRate(tTask, 0, 455);
+        //t.cancel();
 
         play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,18 +94,23 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
                 {
                     currentPlaying = 0;
                     player = playlist.get(0).getMediaPlayer();
+                    current.setText("Currently Playing: "+playlist.get(currentPlaying).getName());
                     player.setOnCompletionListener(MainActivity.this);
                     player.start();
+                    play.setImageResource(R.drawable.pause);
+                    //t.scheduleAtFixedRate(tTask, 0, 455);
                 }
                 else if(player.isPlaying())
                 {
                     play.setImageResource(R.drawable.play);
                     player.pause();
+
                 }
                 else
                 {
                     play.setImageResource(R.drawable.pause);
                     player.start();
+                    //t.scheduleAtFixedRate(tTask, 0, 455);
                 }
             }
         });
@@ -116,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
                     player = playlist.get(0).getMediaPlayer();
                     player.setOnCompletionListener(MainActivity.this);
                     player.start();
+                    current.setText("Currently Playing: "+playlist.get(currentPlaying).getName());
                 }
                 else {
                     player.stop();
@@ -126,13 +135,15 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
                             Log.d("prepare error", e.getMessage());
                         }
                         currentPlaying = 0;
+                        current.setText("Currently Playing: "+playlist.get(currentPlaying).getName());
                     } else {
                         currentPlaying++;
                         try {
                             preparePls();
                         } catch (Exception e) {
-                            throw new RuntimeException(e);
+                            Log.d("prepare error", e.getMessage());
                         }
+                        current.setText("Currently Playing: "+playlist.get(currentPlaying).getName());
                     }
                     player = playlist.get(currentPlaying).getMediaPlayer();
                     player.start();
@@ -149,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
                     player = playlist.get(0).getMediaPlayer();
                     player.setOnCompletionListener(MainActivity.this);
                     player.start();
+                    current.setText("Currently Playing: "+playlist.get(currentPlaying).getName());
                 }
                 else {
                     player.stop();
@@ -159,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
                             Log.d("prepare error", e.getMessage());
                         }
                         currentPlaying = playlist.size() - 1;
+                        current.setText("Currently Playing: "+playlist.get(currentPlaying).getName());
                     }
                     else {
                         currentPlaying--;
@@ -167,6 +180,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
                         } catch (Exception e) {
                             Log.d("prepare error", e.getMessage());
                         }
+                        current.setText("Currently Playing: "+playlist.get(currentPlaying).getName());
                     }
                     player = playlist.get(currentPlaying).getMediaPlayer();
                     player.start();
@@ -188,6 +202,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
                 player.setOnCompletionListener(MainActivity.this);
 
                 player.start();
+                current.setText("Currently Playing: "+playlist.get(currentPlaying).getName());
             }
         });
 
