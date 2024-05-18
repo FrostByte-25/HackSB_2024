@@ -1,0 +1,89 @@
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:background=\"@drawable/sunset\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:padding=\"20dp\"\n    tools:context=\".MainActivity\" >\n\n    <TextView\n        android:id=\"@+id/textView\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_centerHorizontal=\"true\"\n        android:textSize=\"16dp\"\n        android:text=\"Harmony Hub\"\n        android:textColor=\"@color/white\"\n        android:textStyle=\"bold\"\n        />\n\n    <TextView\n        android:id=\"@+id/textView2\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_below=\"@id/textView\"\n        android:layout_marginTop=\"10dp\"\n        android:text=\"timer\" />\n\n    <ImageView\n        android:id=\"@+id/imageView\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_below=\"@id/textView2\"\n        android:layout_marginTop=\"30dp\"\n        android:src=\"@tools:sample/avatars\" />\n\n    <TextView\n        android:id=\"@+id/textView3\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_below=\"@id/imageView\"\n        android:layout_marginTop=\"20dp\"\n        android:text=\"Timer\"\n        android:textColor=\"@color/white\"\n        />\n\n    <ImageView\n        android:id=\"@+id/imageView2\"\n        android:layout_width=\"50dp\"\n        android:layout_height=\"50dp\"\n        android:layout_below=\"@id/textView3\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_marginTop=\"20dp\"\n        android:src=\"@tools:sample/avatars\"\n        app:srcCompat=\"@drawable/play\"\n        app:tint=\"@color/cardview_light_background\"/>\n\n    <ImageView\n        android:id=\"@+id/imageView3\"\n        android:layout_width=\"50dp\"\n        android:layout_height=\"50dp\"\n        android:layout_below=\"@id/textView3\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_marginTop=\"20dp\"\n        android:layout_marginRight=\"15dp\"\n        android:layout_toStartOf=\"@id/imageView2\"\n        app:srcCompat=\"@drawable/back\"\n        app:tint=\"@color/cardview_light_background\" />\n\n    <ImageView\n        android:id=\"@+id/imageView4\"\n        android:layout_width=\"50dp\"\n        android:layout_height=\"50dp\"\n        android:layout_below=\"@id/textView3\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_marginLeft=\"15dp\"\n        android:layout_marginTop=\"20dp\"\n        android:layout_toEndOf=\"@id/imageView2\"\n        android:src=\"@tools:sample/avatars\"\n        app:srcCompat=\"@drawable/skip\"\n        app:tint=\"@color/cardview_light_background\"/>\n\n    <SeekBar\n        android:id=\"@+id/seekBar\"\n        android:layout_width=\"200dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_below=\"@id/imageView2\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_marginTop=\"20dp\"\n        android:background=\"@color/white\"\n        android:backgroundTint=\"#FFFFFF\" />\n\n    <ListView\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"300dp\"\n        android:layout_below=\"@id/seekBar\"\n        android:layout_centerHorizontal=\"true\"\n        android:layout_marginTop=\"10dp\" />\n\n\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	(revision 7b42d68a3dca99b75e5cfd10f0d0efdff44024b0)
++++ b/app/src/main/res/layout/activity_main.xml	(date 1716052862425)
+@@ -2,7 +2,6 @@
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+-    android:background="@drawable/sunset"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:padding="20dp"
+@@ -15,7 +14,6 @@
+         android:layout_centerHorizontal="true"
+         android:textSize="16dp"
+         android:text="Harmony Hub"
+-        android:textColor="@color/white"
+         android:textStyle="bold"
+         />
+ 
+@@ -44,9 +42,7 @@
+         android:layout_centerHorizontal="true"
+         android:layout_below="@id/imageView"
+         android:layout_marginTop="20dp"
+-        android:text="Timer"
+-        android:textColor="@color/white"
+-        />
++        android:text="TextView" />
+ 
+     <ImageView
+         android:id="@+id/imageView2"
+@@ -56,8 +52,7 @@
+         android:layout_centerHorizontal="true"
+         android:layout_marginTop="20dp"
+         android:src="@tools:sample/avatars"
+-        app:srcCompat="@drawable/play"
+-        app:tint="@color/cardview_light_background"/>
++        app:srcCompat="@drawable/play" />
+ 
+     <ImageView
+         android:id="@+id/imageView3"
+@@ -68,8 +63,7 @@
+         android:layout_marginTop="20dp"
+         android:layout_marginRight="15dp"
+         android:layout_toStartOf="@id/imageView2"
+-        app:srcCompat="@drawable/back"
+-        app:tint="@color/cardview_light_background" />
++        app:srcCompat="@drawable/back" />
+ 
+     <ImageView
+         android:id="@+id/imageView4"
+@@ -81,25 +75,22 @@
+         android:layout_marginTop="20dp"
+         android:layout_toEndOf="@id/imageView2"
+         android:src="@tools:sample/avatars"
+-        app:srcCompat="@drawable/skip"
+-        app:tint="@color/cardview_light_background"/>
++        app:srcCompat="@drawable/skip" />
+ 
+     <SeekBar
+         android:id="@+id/seekBar"
+         android:layout_width="200dp"
+         android:layout_height="wrap_content"
+-        android:layout_below="@id/imageView2"
+         android:layout_centerHorizontal="true"
+-        android:layout_marginTop="20dp"
+-        android:background="@color/white"
+-        android:backgroundTint="#FFFFFF" />
++        android:layout_below="@id/imageView2"
++        android:layout_marginTop="20dp"/>
+ 
+     <ListView
+         android:layout_width="match_parent"
+         android:layout_height="300dp"
+-        android:layout_below="@id/seekBar"
+         android:layout_centerHorizontal="true"
+-        android:layout_marginTop="10dp" />
++        android:layout_below="@id/seekBar"
++        android:layout_marginTop="10dp"/>
+ 
+ 
+ </RelativeLayout>
+\ No newline at end of file
