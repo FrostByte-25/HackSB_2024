@@ -39,7 +39,7 @@ public class CustomAdapter extends ArrayAdapter<Track>
         TextView time = aL.findViewById(R.id.time);
 
         name.setText(mPA.get(position).getName());
-        time.setText(mPA.get(position).getDuration());
+        time.setText("3:50");
 
         return aL;
     }
