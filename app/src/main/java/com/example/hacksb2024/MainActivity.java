@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
 
     ArrayList<Track> playlist = new ArrayList<Track>();
 
@@ -107,31 +107,30 @@ public class MainActivity extends AppCompatActivity {
                 if(player != null)
                 {
                     player.stop();
+                    player.setOnCompletionListener(null);
                 }
                 currentPlaying = position;
                 player = playlist.get(position).getMediaPlayer();
+                player.setOnCompletionListener(MainActivity.this);
 
                 player.start();
             }
         });
 
-        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                if(currentPlaying == playlist.size()-1)
-                {
-                    currentPlaying = 0;
-                }
-                else
-                {
-                    currentPlaying++;
-                }
-                player = playlist.get(currentPlaying).getMediaPlayer();
-            }
-        });
 
 
+    }
 
-
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+        if(currentPlaying == playlist.size()-1)
+        {
+            currentPlaying = 0;
+        }
+        else
+        {
+            currentPlaying++;
+        }
+        player = playlist.get(currentPlaying).getMediaPlayer();
     }
 }
