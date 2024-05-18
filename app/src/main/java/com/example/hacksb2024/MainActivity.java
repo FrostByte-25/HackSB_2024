@@ -25,9 +25,10 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
     ArrayList<Integer> frameIds = new ArrayList<Integer>();
     ImageView ani;
     ImageView play,forward,back;
-    MediaPlayer player;
+    MediaPlayer player, freeman;
     int currentPlaying = -1;
     TextView current;
+    Timer t = new Timer();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
 
         current = findViewById(R.id.textView3);
         current.setText("Currently Playing: none");
+
+        freeman = MediaPlayer.create(this, R.raw.freeman);
 
 
 
@@ -75,8 +78,6 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
 
         gifFrames frames = new gifFrames(frameIds);
 
-
-        Timer t = new Timer();
         TimerTask tTask = new TimerTask() {
             @Override
             public void run() {
@@ -85,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
             }
         };
         t.scheduleAtFixedRate(tTask, 0, 455);
-        //t.cancel();
 
         play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,19 +98,16 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
                     player.setOnCompletionListener(MainActivity.this);
                     player.start();
                     play.setImageResource(R.drawable.pause);
-                    //t.scheduleAtFixedRate(tTask, 0, 455);
                 }
                 else if(player.isPlaying())
                 {
                     play.setImageResource(R.drawable.play);
                     player.pause();
-
                 }
                 else
                 {
                     play.setImageResource(R.drawable.pause);
                     player.start();
-                    //t.scheduleAtFixedRate(tTask, 0, 455);
                 }
             }
         });
@@ -203,6 +200,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
 
                 player.start();
                 current.setText("Currently Playing: "+playlist.get(currentPlaying).getName());
+                t.scheduleAtFixedRate(tTask, 0, 455);
             }
         });
 
